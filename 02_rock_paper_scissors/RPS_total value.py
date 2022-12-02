@@ -37,14 +37,35 @@ class Sign:
     def __call__(self):
         return self.name.value
 
+def calculateOwnSign(opponent: Sign, outcome)-> Sign:
+    ownSign = Sign("X")
+    match outcome:
+        # need to lose
+        case "X":
+            ownSign.name = GAME_RULES[opponent.name]
+        # draw
+        case "Y":
+            ownSign.name = opponent.name
+        # need to win
+        case "Z":
+            for winner, loser  in GAME_RULES.items():
+                if opponent.name is loser:
+                    ownSign.name = winner
+
+    return ownSign
+
+
 if __name__ == "__main__":
     with open("input.txt") as input_file:
         total = 0
         for line in input_file:
-            line.strip()
             signs = line.split(" ")
             opponent = Sign(signs[0])
-            me = Sign(signs[1].strip("\n"))
+
+            # call for Pt1:
+            # me = Sign(signs[1].strip("\n"))
+            # call for Pt2:
+            me = calculateOwnSign(opponent, signs[1].strip("\n"))
 
             total += me.play(opponent)
             total += me()
