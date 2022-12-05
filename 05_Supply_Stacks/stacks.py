@@ -37,8 +37,13 @@ if __name__ == "__main__":
         
         for moves in lines[idx+1:]:
             numbers = re.findall('[0-9]+',moves)
+            temp = []
             for _ in range(int(numbers[0])):
-                stacks[int(numbers[2])].append(stacks[int(numbers[1])].pop())
+                temp.append(stacks[int(numbers[1])].pop())
+
+            temp.reverse()
+            for item in temp:
+                stacks[int(numbers[2])].append(item)
 
         print("\n\nEnd state")
         print_stacks(stacks)
