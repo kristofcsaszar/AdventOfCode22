@@ -9,6 +9,7 @@ packages = [{include = "advent_of_code_22"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 regex-spm = "^1.0.0"
+numpy = "^1.23.5"
 
 
 [build-system]
